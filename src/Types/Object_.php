@@ -12,7 +12,7 @@
 
 namespace phpDocumentor\Reflection\Types;
 
-use phpDocumentor\Reflection\Fqsen;
+use phpDocumentor\Reflection\ClassLikeName;
 use phpDocumentor\Reflection\Type;
 
 /**
@@ -24,16 +24,16 @@ use phpDocumentor\Reflection\Type;
  */
 final class Object_ implements Type
 {
-    /** @var Fqsen|null */
+    /** @var ClassLikeName|null */
     private $fqsen;
 
     /**
      * Initializes this object with an optional FQSEN, if not provided this object is considered 'untyped'.
      *
-     * @param Fqsen $fqsen
+     * @param ClassLikeName $fqsen
      * @throws \InvalidArgumentException when provided $fqsen is not a valid type.
      */
-    public function __construct(Fqsen $fqsen = null)
+    public function __construct(ClassLikeName $fqsen = null)
     {
         if (strpos((string)$fqsen, '::') !== false || strpos((string)$fqsen, '()') !== false) {
             throw new \InvalidArgumentException(
@@ -48,7 +48,7 @@ final class Object_ implements Type
     /**
      * Returns the FQSEN associated with this object.
      *
-     * @return Fqsen|null
+     * @return ClassLikeName|null
      */
     public function getFqsen()
     {

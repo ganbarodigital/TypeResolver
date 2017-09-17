@@ -63,17 +63,18 @@ final class TypeResolver
         'iterable' => Iterable_::class,
     );
 
-    /** @var FqsenResolver */
-    private $fqsenResolver;
+    /** @var nameResolver */
+    private $nameResolver;
 
     /**
-     * Initializes this TypeResolver with the means to create and resolve Fqsen objects.
+     * Initializes this TypeResolver with the means to create and resolve
+     * ClassLikeName objects.
      *
-     * @param FqsenResolver $fqsenResolver
+     * @param NameResolverInterface $nameResolver
      */
-    public function __construct(FqsenResolver $fqsenResolver = null)
+    public function __construct(NameResolverInterface $nameResolver = null)
     {
-        $this->fqsenResolver = $fqsenResolver ?: new FqsenResolver();
+        $this->nameResolver = $nameResolver ?: new nameResolver();
     }
 
     /**
@@ -356,6 +357,6 @@ final class TypeResolver
      */
     private function resolveTypedObject($type, Context $context = null)
     {
-        return new Object_($this->fqsenResolver->resolve($type, $context));
+        return new Object_($this->nameResolver->resolve($type, $context));
     }
 }
